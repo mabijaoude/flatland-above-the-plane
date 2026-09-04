@@ -1,51 +1,105 @@
 # Flatland: Above the Plane
 
-An independent browser simulation inspired by the dimensional thought experiment in Edwin A. Abbott's 1884 novella *Flatland: A Romance of Many Dimensions*.
+An interactive browser world about dimensions, perception, boundaries, and the social satire inside Edwin A. Abbott's 1884 novella *Flatland: A Romance of Many Dimensions*.
 
 **Live demo:** [flatland.codefactory.synology.me](https://flatland.codefactory.synology.me/)
 
-The world is authoritative in two dimensions: citizens, streets, buildings, walls, doors, routes, and interventions all exist on one plane. A three-dimensional survey view lets the visitor see that plane from outside it and test what an extra spatial direction would make possible.
+The simulation keeps its world authoritative in two dimensions: citizens, streets, buildings, walls, doors, routes, and interventions all exist on one plane. The visitor can survey that plane from three-dimensional space and test what one additional direction makes possible.
 
-## The thought experiment
+This project takes both sides of *Flatland* seriously. The book is a mathematical thought experiment about dimensions, but it is also a satire narrated from within a rigid society organized by sex, geometric form, and inherited class. The application makes the dimensional argument playable while keeping the book's social system in its historical and critical context rather than reproducing it as the rules of the simulated town.
 
-In *Flatland*, the Sphere demonstrates that a being with access to a third direction can see inside closed two-dimensional spaces, retrieve an object from a locked cupboard, and lift the Square out of his plane. The Square then argues by analogy for a fourth spatial dimension.
+## The mathematical roots
 
-This project turns that progression into an interactive scenario:
+### Dimensions as independent directions
 
-1. A Flatlander is enclosed by a two-dimensional boundary.
-2. A three-dimensional visitor lifts the Flatlander off the plane, moves across the boundary, and returns them without crossing the wall.
-3. By the same Euclidean analogy, a hypothetical four-dimensional visitor could move an object into or out of a sealed three-dimensional box without crossing its surface.
+The core idea begins with a simple progression in Euclidean geometry:
 
-The Closed Room rescue and the sealed-box example are adaptations of the book's dimensional reasoning, not scenes reproduced word-for-word. The analogy assumes an additional Euclidean spatial coordinate; it is a mathematical visualization, not a claim about the physics of our universe.
+- a point has no spatial extent;
+- a line adds one independent direction;
+- a plane adds a second direction perpendicular to the first;
+- ordinary space adds a third direction perpendicular to both directions in the plane; and
+- a hypothetical four-dimensional space adds another independent coordinate, conventionally called `w`.
 
-## Source and context
+A resident of a plane may move along `x` and `y`, but not along `z`. A three-dimensional observer has no new route *within* the plane; they have a route *out of* it. That extra degree of freedom changes which regions are reachable without crossing a lower-dimensional boundary.
 
-*Flatland* combines mathematical fiction with a satire of Victorian society. Part I's narrator describes a social order in which sex determines geometry, rank follows the number of sides, and the state enforces the hierarchy through coercion and violence. This simulation does not use those rules: shape and side count do not determine a citizen's intelligence, rights, worth, gender, or occupation.
+### The locked-room argument
 
-Abbott's revised preface directly addresses the contemporary “woman-hater” objection, says the narrator had identified himself “perhaps too closely” with Flatland's views, and says he wished to disavow aristocratic tendencies attributed to him. Modern scholarship commonly reads the work as satire. The project does not require readers to accept a single comprehensive claim about Abbott's intentions; it states the narrower source record and the choices made in this adaptation.
+Treat Flatland as the plane `z = 0`. A closed curve in that plane separates an inside from an outside. A resident who must remain at `z = 0` cannot move between those regions without crossing the curve. A three-dimensional visitor can instead:
 
-See [Source and adaptation notes](docs/SOURCE_AND_CONTEXT.md) for the chapter references, short quotations from the revised preface, scholarly sources, and a precise source-versus-project map. The complete historical text remains directly available in the application without a context gate.
+1. lift the resident away from the plane by changing `z`;
+2. move across the boundary while outside the plane; and
+3. return the resident to `z = 0` on the other side.
 
-## Experience
+The wall has not been opened or crossed. It was bypassed through a direction unavailable to the resident.
+
+Abbott develops this reasoning through the Sphere's demonstrations to the Square. In section 17, the Sphere enters a locked cupboard from outside the plane, removes a tablet, and lifts the Square into Spaceland. In section 19, the Square extends the pattern and asks whether a being with access to a fourth spatial direction could enter a sealed three-dimensional room without passing through its doors, windows, or walls.
+
+The corresponding idealized model places ordinary space at `w = 0`. A four-dimensional path could leave that space, move around a closed three-dimensional surface, and return on its other side. This conclusion depends on the barrier being confined to the lower-dimensional space. It is a geometric analogy—not evidence that a traversable fourth spatial dimension or higher-dimensional visitors exist in nature.
+
+The application's Closed Room rescue is an interactive synthesis of Abbott's cupboard demonstration and the Square's lift. It is not a scene reproduced word-for-word from the novella. The 2D-to-3D case is playable; the 3D-to-4D case is explained but not simulated.
+
+### Perception from inside and outside the plane
+
+Dimensionality affects observation as well as movement. The survey camera sees the complete planar layout from outside it, including relationships that no resident can view all at once. **Native vision** instead approximates the restricted experience of a citizen in the plane through boundary brightness, neighboring cross-sections, and wall occlusion.
+
+The elevated camera never turns Flatland into an ordinary 3D world. Simulation geometry, collision, pathfinding, doors, wall edits, and citizen state remain two-dimensional; height belongs to the visitor's viewpoint and dimensional interventions.
+
+## The book and its society
+
+Published in Victorian Britain in 1884, *Flatland* uses an impossible geometric world to examine the limits of perception and the habits of a hierarchical society. Its narrator, A Square, initially treats the institutions and prejudices around him as natural facts. That limited viewpoint is part of the book's effect.
+
+The society described in Part I is hereditary and coercive:
+
+- women are represented as straight lines and subjected to rules justified by their assigned geometry;
+- male class is encoded by polygonal form and number of sides, with triangles among the lower orders, squares and pentagons in professional ranks, many-sided polygons in the nobility, and near-circles in the priestly class;
+- irregularity is treated as a defect and a threat to social order;
+- rank, education, occupation, and political authority are tied to inherited shape; and
+- controlled breeding, confinement, surgery, censorship, and execution are used to preserve the hierarchy.
+
+The result can be read as commentary on class, aristocracy, gender, education, institutional power, and a society's tendency to mistake its conventions for laws of nature. Abbott's revised preface responded directly to contemporary criticism of the portrayal of women. It distinguished the narrator from the author, said the Square had identified himself too closely with accepted Flatland views, and disavowed the aristocratic tendencies attributed to the work.
+
+Those statements are relevant evidence, but they do not settle every question about Abbott's intentions or every modern response to the book. Modern scholarship commonly discusses *Flatland* as social satire. This project presents the source record, identifies its own adaptation choices, and leaves readers free to judge the text.
+
+For the detailed chapter references, source-versus-project map, and historical scholarship, see [Source and adaptation notes](docs/SOURCE_AND_CONTEXT.md). Useful external starting points include the [complete Project Gutenberg edition](https://www.gutenberg.org/ebooks/97), the Open University's discussion of [women's status, Victorian education, and social satire](https://www.open.ac.uk/blogs/MathEd/index.php/2022/09/12/flatland-as-social-satire-womens-status-in-victorian-times-and-the-push-for-educational-reform-by-xiang-fu/), and Thomas Banchoff's [mathematical and biographical introduction](https://www.math.brown.edu/tbanchof/abbott/Flatland/Publications/intros/banchoff.pdf).
+
+## How this adaptation responds
+
+The simulation takes the dimensional thought experiment from the book, not its social hierarchy.
+
+| Element | In Abbott's text | In this project |
+| --- | --- | --- |
+| A world confined to a plane | Flatlanders cannot rise above or sink below their surface. | The authoritative world, collision, routes, and interventions are planar. |
+| Access to a sealed 2D space | The Sphere enters a locked cupboard and lifts the Square from the plane. | The visitor can lift a citizen across the Closed Room boundary without cutting its wall. |
+| A fourth spatial dimension | The Square argues for a further direction by analogy. | The sealed-box case is explained as a hypothetical extension, not presented as physics or simulated fact. |
+| Geometric social rank | Sex, occupation, status, and rights are assigned through shape and regularity. | Shape is a visual and geometric property only; it does not determine gender, intelligence, worth, rights, or occupation. |
+| Historical source | The narrator presents Flatland's institutions from inside their culture. | The original text remains available unchanged, accompanied by optional context and a clear adaptation boundary. |
+
+Inside the application, **Source and context** opens a dedicated explanation of the locked-room analogy, its 2D-to-3D demonstration, the further 4D argument, the relevant passages in sections 17 and 19, the book's social structure, and the choices made by this adaptation. It also links directly into the corresponding book chapters. The context is available without becoming a gate: readers can always open the complete historical text directly.
+
+## The experience
 
 - **Town view** follows autonomous citizens, surveys the town from above, and frames the plane as an engraved 1884 map.
 - **Find citizen** searches live intent and destination data, then locates, follows, or picks up a resident directly.
-- **Native vision** approximates what a resident confined to the plane could see: boundary brightness and neighboring cross-sections, with walls providing occlusion.
-- **Edit walls** makes every boundary state-aware: hover or tap an edge, remove an existing wall in red, or add a wall across an opening in green. Every change triggers route replanning.
-- **Dimensional manipulation** lifts any selected citizen without a preliminary control step; placing them resumes their routine automatically.
-- **Read the book** opens the complete illustrated Project Gutenberg edition, with its source notice and license retained.
+- **Native vision** approximates what a resident confined to the plane could see, with planar walls providing occlusion.
+- **Edit walls** makes boundaries state-aware: remove an existing wall or add one across an opening, then watch every affected route replan.
+- **Dimensional manipulation** lifts a selected citizen out of the plane and returns them elsewhere without crossing an intervening wall.
+- **Character creation** adds new citizens to the same schedules, needs, movement rules, and local save system as the original population.
+- **Read the book** opens the complete illustrated Project Gutenberg edition with its header, footer, source notice, and license retained.
 
-The town contains homes, workplaces, civic buildings, public spaces, and deterministic resident schedules. Versioned browser-local saves retain topology, routines, player-created citizens, and camera state. No account or server-side save is required.
+The town contains homes, workplaces, civic buildings, public spaces, and deterministic resident schedules. Versioned browser-local saves retain topology, routines, player-created citizens, and camera state. No account, tracking identity, or server-side save is required.
 
-Desktop shortcuts are surfaced contextually in the application: `E` picks up the selected citizen, `F` follows, `T` opens wall editing, `Ctrl`/`⌘` + `Z` undoes a plane change, and `Space` places and releases a carried citizen. In wall editing, hovering an edge reveals its only valid action—red Remove wall or green Add wall. On phones and tablets, tapping an edge reveals that same contextual action while the bottom bar becomes Undo, Reset, and Done. Following a citizen replaces the navigation with a persistent bar for their actions, native view, and a one-tap Stop.
+Desktop shortcuts are surfaced contextually in the application: `E` picks up the selected citizen, `F` follows, `T` opens wall editing, `Ctrl`/`⌘` + `Z` undoes a plane change, and `Space` places and releases a carried citizen. On phones and tablets, the same actions are presented through touch-oriented controls.
 
-## Technology
+## Simulation and technology
 
 - React 19, TypeScript, Vite, Three.js, React Three Fiber, and Drei
 - Deterministic 30 Hz simulation in a Web Worker
-- Local A* navigation, region topology, spatial-hash avoidance, and explicit AI/player control
+- Local A* navigation over editable region topology
+- Spatial-hash avoidance and explicit AI/player control transitions
+- Two-dimensional collision and intervention rules independent of the 3D camera
+- Versioned browser-local persistence
 - Blender-authored planar materials baked to compact color and normal textures
-- Vitest unit and component tests
+- Vitest unit and component coverage for simulation, geometry, topology, controls, persistence, and guided interactions
 
 ## Run locally
 
@@ -61,12 +115,13 @@ pnpm dev
 
 Vite serves the application on `http://127.0.0.1:5173` by default.
 
-Run the verification suite:
+Run the complete release verification suite:
 
 ```powershell
-pnpm test
-pnpm build
+pnpm verify
 ```
+
+That command validates required public-release files and dependency licenses, runs the tests, and creates a production build.
 
 Rebuild the optional planar material library with Blender 4.5 or later:
 
@@ -77,7 +132,7 @@ blender --background --python scripts/blender/build_flatworld.py
 ## Repository layout
 
 - `src/simulation/` — deterministic society, topology, geometry, navigation, and worker
-- `src/components/` — planar renderer, reader, camera views, dialogs, and controls
+- `src/components/` — planar renderer, reader, camera views, dialogs, controls, and source-context experience
 - `public/books/flatland/` — complete Project Gutenberg HTML edition and source record
 - `public/assets/materials/` — optimized runtime color and normal textures
 - `art_source/` — editable Blender material source and historical prototypes
@@ -87,10 +142,10 @@ blender --background --python scripts/blender/build_flatworld.py
 
 ## Contributing and security
 
-Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), and use [SECURITY.md](SECURITY.md) for private vulnerability reports. Changes that characterize the book or its history should cite a primary source or reliable scholarship.
+Contributions that strengthen the dimensional simulation, accessibility, historical accuracy, or documentation are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), and use [SECURITY.md](SECURITY.md) for private vulnerability reports. Changes that characterize the book or its history should cite the primary text or reliable scholarship and clearly distinguish Abbott's work from project-created examples.
 
 ## Rights and licenses
 
 Original project code, documentation, and assets are licensed under the [MIT License](LICENSE), unless a file says otherwise. The bundled book is not relicensed under MIT: Project Gutenberg identifies ebook 97 as public domain in the USA, and its retained Project Gutenberg notice and license govern use of that distributed edition. Copyright status can differ outside the United States.
 
-See [Rights map](docs/RIGHTS.md) and [Third-party notices](THIRD_PARTY_NOTICES.md) before redistributing the complete repository or a built release.
+See the [rights map](docs/RIGHTS.md) and [third-party notices](THIRD_PARTY_NOTICES.md) before redistributing the complete repository or a built release.
