@@ -9,15 +9,25 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 900,
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes("@react-three/drei")) return "drei";
-          if (id.includes("@react-three/fiber")) return "react-three-fiber";
-          if (id.includes("/three/")) return "three";
-          if (id.includes("react-dom") || id.includes("/react/")) return "react";
-          if (id.includes("lucide-react")) return "icons";
-          return undefined;
+        codeSplitting: {
+          includeDependenciesRecursively: false,
+          groups: [
+            { name: "drei", test: /@react-three[\\/]drei/ },
+            { name: "react-three-fiber", test: /@react-three[\\/]fiber/ },
+            {
+              name: "three",
+              test: (id) =>
+                /[\\/]three[\\/]/.test(id) && !id.includes("@react-three")
+            },
+            {
+              name: "react",
+              test: (id) =>
+                id.includes("react-dom") || /[\\/]react[\\/]/.test(id)
+            },
+            { name: "icons", test: /lucide-react/ }
+          ]
         }
       }
     }

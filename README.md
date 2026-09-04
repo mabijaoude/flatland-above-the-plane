@@ -105,7 +105,7 @@ Desktop shortcuts are surfaced contextually in the application: `E` picks up the
 
 Requirements:
 
-- Node.js 22 or later
+- Node.js 22.12 or later
 - pnpm 11 (the repository pins the package-manager version)
 
 ```powershell
