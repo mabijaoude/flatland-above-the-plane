@@ -29,13 +29,14 @@
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "@types/three": "0.185.0",
-    "@vitejs/plugin-react": "5.1.1",
+    "@vitejs/plugin-react": "6.1.1",
+    "esbuild": "0.28.1",
     "typescript": "5.9.3",
-    "vite": "7.3.0",
-    "vitest": "4.0.16"
+    "vite": "8.2.2",
+    "vitest": "4.1.0"
   },
   "engines": {
-    "node": ">=22",
+    "node": ">=22.12",
     "pnpm": ">=11"
   },
   "packageManager": "pnpm@11.9.0"
