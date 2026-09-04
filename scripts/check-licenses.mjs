@@ -10,10 +10,23 @@ const allowedLicenses = new Set([
 ]);
 
 const pnpmCli = process.env.npm_execpath;
-const command = pnpmCli ? process.execPath : process.platform === "win32" ? "pnpm.cmd" : "pnpm";
-const args = pnpmCli
-  ? [pnpmCli, "licenses", "list", "--prod", "--json"]
-  : ["licenses", "list", "--prod", "--json"];
+const pnpmCliIsJavaScript = pnpmCli ? /\.(?:c|m)?js$/i.test(pnpmCli) : false;
+let command;
+let args;
+
+if (pnpmCliIsJavaScript) {
+  command = process.execPath;
+  args = [pnpmCli, "licenses", "list", "--prod", "--json"];
+} else if (pnpmCli) {
+  command = pnpmCli;
+  args = ["licenses", "list", "--prod", "--json"];
+} else if (process.platform === "win32") {
+  command = process.env.ComSpec || "cmd.exe";
+  args = ["/d", "/s", "/c", "pnpm.cmd licenses list --prod --json"];
+} else {
+  command = "pnpm";
+  args = ["licenses", "list", "--prod", "--json"];
+}
 const result = spawnSync(command, args, { encoding: "utf8" });
 
 if (result.status !== 0) {
