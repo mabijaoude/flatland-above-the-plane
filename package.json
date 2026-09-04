@@ -1,0 +1,42 @@
+{
+  "name": "flatland-above-the-plane",
+  "version": "0.2.0",
+  "description": "An interactive 2D to 3D to 4D thought experiment inspired by Flatland.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check:licenses": "node scripts/check-licenses.mjs",
+    "check:release": "pnpm check:licenses && node scripts/check-release.mjs",
+    "verify": "pnpm check:release && pnpm test && pnpm build"
+  },
+  "dependencies": {
+    "@fontsource/besley": "5.2.8",
+    "@fontsource/source-sans-3": "5.2.9",
+    "@react-three/drei": "10.7.8",
+    "@react-three/fiber": "9.4.2",
+    "lucide-react": "0.562.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "three": "0.182.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.185.0",
+    "@vitejs/plugin-react": "5.1.1",
+    "typescript": "5.9.3",
+    "vite": "7.3.0",
+    "vitest": "4.0.16"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=11"
+  },
+  "packageManager": "pnpm@11.9.0"
+}

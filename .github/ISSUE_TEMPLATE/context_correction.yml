@@ -1,0 +1,37 @@
+name: Source or context correction
+description: Correct a claim about the novella, mathematics, or historical context.
+title: "[Context]: "
+body:
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim to correct
+      description: Quote the exact project wording and identify where it appears.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+      description: State the replacement wording as precisely as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Link the relevant chapter, edition, primary document, or reliable scholarship.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of correction
+      options:
+        - Source text
+        - Source-versus-adaptation boundary
+        - Mathematics
+        - Historical context
+        - Rights or attribution
+    validations:
+      required: true
