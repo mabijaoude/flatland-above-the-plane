@@ -1,0 +1,14 @@
+.git
+.codex
+.codex-remote-attachments
+.asset-cache
+.vite.log
+.vite-error.log
+art_source
+build
+coverage
+dist
+node_modules
+*.md
+*.blend
+*.blend1

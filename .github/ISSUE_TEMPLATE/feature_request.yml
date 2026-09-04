@@ -1,0 +1,43 @@
+name: Feature request
+description: Propose a focused improvement to the dimensional experience.
+title: "[Idea]: "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What need would this address?
+      description: Explain the experience or maintenance problem before proposing a solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: Describe the smallest useful version and any alternatives considered.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Dimensional simulation
+        - Citizen behavior
+        - Interface or accessibility
+        - Book reader
+        - Documentation or source context
+        - Build and maintenance
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Relevant sources
+      description: If the request characterizes the book, include a chapter link or reliable historical source.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This proposal keeps source material distinct from project-created examples.
+          required: true

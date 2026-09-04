@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#e5dcc5" />
+    <meta name="description" content="Explore a living 2D town and test the Flatland thought experiment: how an extra spatial direction changes a sealed boundary." />
+    <meta name="application-name" content="Flatland: Above the Plane" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Flatland: Above the Plane" />
+    <meta property="og:description" content="An independent 2D to 3D to 4D dimensional thought experiment inspired by Edwin A. Abbott's Flatland." />
+    <meta property="og:site_name" content="Flatland: Above the Plane" />
+    <meta name="twitter:title" content="Flatland: Above the Plane" />
+    <meta name="twitter:description" content="An independent 2D to 3D to 4D dimensional thought experiment inspired by Edwin A. Abbott's Flatland." />
+    <title>Flatland: Above the Plane</title>
+    <script>
+      window.addEventListener("error", function (event) {
+        var root = document.getElementById("root");
+        if (!root || root.childNodes.length) return;
+        root.innerHTML = '<main class="boot-error"><p>Flatland could not be prepared.</p><small>' + String(event.message || event.error || "Unknown error") + "</small></main>";
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <main class="boot-shell" aria-label="Preparing Flatland">
+        <span>Flatland</span>
+        <p>Preparing the district…</p>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+services:
+  web:
+    build:
+      context: .
+    image: ${IMAGE_REF:-flatworld:local}
+    restart: unless-stopped
+    ports:
+      - "${HOST_PORT:-5573}:80"
