@@ -64,7 +64,7 @@ An optional versioned export/import would make browser-local saves less fragile 
 ## Small improvements completed in this pass
 
 - Reader text-size controls remain available on phone widths; the size is remembered.
-- Font changes and reopening preserve a text-block reading anchor.
+- Font changes, reopening, and portrait/landscape rotation preserve a text-block reading anchor.
 - Reader chapter navigation respects reduced-motion preferences.
 - Search reset and book/context return paths keep useful keyboard focus; onboarding contains Tab focus.
 - Geometry choices have small polygon previews; the help recipe demonstrates crossing a still-closed boundary.
