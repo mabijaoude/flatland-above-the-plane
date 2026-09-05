@@ -12,3 +12,12 @@ node_modules
 *.md
 *.blend
 *.blend1
+.env
+.env.*
+*.key
+*.pem
+.nas-deploy
+build-info.json
+playwright-report
+test-results
+tests

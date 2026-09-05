@@ -96,7 +96,15 @@ export function CharacterCreator({
         <fieldset disabled={pending}>
           <legend>Geometry</legend>
           <div className="shape-options">
-            {SHAPES.map((count) => <button type="button" aria-pressed={sides === count} className={sides === count ? "is-selected" : ""} key={count} onClick={() => setSides(count)}>{count}<span>sides</span></button>)}
+            {SHAPES.map((count) => <button type="button" aria-pressed={sides === count} className={sides === count ? "is-selected" : ""} key={count} onClick={() => setSides(count)}>
+              <svg className="shape-option-preview" viewBox="0 0 32 32" aria-hidden="true">
+                <polygon points={Array.from({ length: count }, (_, index) => {
+                  const angle = index * Math.PI * 2 / count - Math.PI / 2;
+                  return `${16 + 12 * Math.cos(angle)},${16 + 12 * Math.sin(angle)}`;
+                }).join(" ")} />
+              </svg>
+              {count}<span>sides</span>
+            </button>)}
           </div>
         </fieldset>
         <div className="form-pair">

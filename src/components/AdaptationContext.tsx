@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight, BookOpenText, ExternalLink, X } from "lucide-react";
 import { useEffect, useRef, type KeyboardEvent, type PointerEvent } from "react";
 import type { BookChapterId } from "./BookReader";
+import { restoreDialogFocus } from "./dialogFocus";
 
 const BOOK_URL = "https://www.gutenberg.org/ebooks/97";
 const OPEN_UNIVERSITY_URL = "https://www.open.ac.uk/blogs/MathEd/index.php/2022/09/12/flatland-as-social-satire-womens-status-in-victorian-times-and-the-push-for-educational-reform-by-xiang-fu/";
@@ -27,7 +28,7 @@ export function AdaptationContext({ onClose, onReadBook }: AdaptationContextProp
       cancelAnimationFrame(frame);
       const target = previousFocus.current;
       requestAnimationFrame(() => {
-        if (target?.isConnected) target.focus();
+        restoreDialogFocus(target);
       });
     };
   }, []);

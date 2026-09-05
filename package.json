@@ -7,12 +7,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc && vite build",
+    "build": "pnpm check:assets && tsc && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:browser": "playwright test",
     "check:licenses": "node scripts/check-licenses.mjs",
-    "check:release": "pnpm check:licenses && node scripts/check-release.mjs",
+    "check:assets": "node scripts/check-assets.mjs",
+    "check:release": "pnpm check:licenses && node scripts/check-release.mjs && node scripts/check-source-paths.mjs",
     "verify": "pnpm check:release && pnpm test && pnpm build"
   },
   "dependencies": {
@@ -26,6 +28,7 @@
     "three": "0.182.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "@types/three": "0.185.0",

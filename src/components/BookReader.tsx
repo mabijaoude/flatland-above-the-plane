@@ -9,17 +9,22 @@ import {
 } from "lucide-react";
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent
 } from "react";
+import { captureReadingAnchor, readingFontScale, restoreReadingAnchor, type ReadingAnchor } from "./readerPosition";
+import { restoreDialogFocus } from "./dialogFocus";
 
 const BOOK_SOURCE = "/books/flatland/index.html";
 const BOOK_SOURCE_PAGE = "https://www.gutenberg.org/ebooks/97";
 const BOOK_LICENSE_PAGE = "https://www.gutenberg.org/policy/license.html";
 const READING_POSITION_KEY = "flatland-book-reader-position-v1";
 const READING_CHAPTER_KEY = "flatland-book-reader-chapter-v1";
+const READING_ANCHOR_KEY = "flatland-book-reader-anchor-v1";
+const READING_SIZE_KEY = "flatland-book-reader-size-v1";
 
 const chapters = [
   { id: "top", label: "Cover and dedication" },
@@ -93,7 +98,7 @@ type BookReaderProps = {
 function focusableElements(container: HTMLElement | null) {
   return [...(container?.querySelectorAll<HTMLElement>(
     "button, select, iframe, [href], [tabindex]:not([tabindex='-1'])"
-  ) ?? [])].filter((element) => !element.hasAttribute("disabled") && !element.hasAttribute("inert"));
+  ) ?? [])].filter((element) => !element.hasAttribute("disabled") && !element.closest("[inert]") && element.getClientRects().length > 0);
 }
 
 export function BookReader({ onClose, onOpenContext, initialChapter }: BookReaderProps) {
@@ -102,9 +107,13 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
   const previousFocus = useRef<HTMLElement | null>(null);
   const readerCleanup = useRef<(() => void) | undefined>(undefined);
   const scrollPosition = useRef(0);
+  const readingAnchor = useRef<ReadingAnchor | null>(null);
   const [ready, setReady] = useState(false);
   const [chapter, setChapter] = useState<BookChapterId>(() => initialChapter ?? savedChapter());
-  const [fontScale, setFontScale] = useState(1.05);
+  const [fontScale, setFontScale] = useState(() => {
+    try { return readingFontScale(window.localStorage.getItem(READING_SIZE_KEY)); }
+    catch { return 1.05; }
+  });
 
   useEffect(() => {
     previousFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -114,18 +123,29 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
       readerCleanup.current?.();
       try {
         window.localStorage.setItem(READING_POSITION_KEY, String(Math.round(scrollPosition.current)));
+        if (readingAnchor.current) window.localStorage.setItem(READING_ANCHOR_KEY, JSON.stringify(readingAnchor.current));
       } catch {
         // Reading still works when browser storage is unavailable.
       }
       const target = previousFocus.current;
       requestAnimationFrame(() => {
-        if (target?.isConnected) target.focus();
+        restoreDialogFocus(target);
       });
     };
   }, []);
 
-  useEffect(() => {
-    frame.current?.contentDocument?.body.style.setProperty("--flatland-reader-font-size", `${fontScale}rem`);
+  useLayoutEffect(() => {
+    const documentElement = frame.current?.contentDocument;
+    const readerWindow = frame.current?.contentWindow;
+    if (documentElement?.body && readerWindow) {
+      const anchor = captureReadingAnchor(documentElement);
+      documentElement.body.style.setProperty("--flatland-reader-font-size", `${fontScale}rem`);
+      restoreReadingAnchor(documentElement, readerWindow, anchor);
+      readingAnchor.current = captureReadingAnchor(documentElement);
+      scrollPosition.current = readerWindow.scrollY;
+    }
+    try { window.localStorage.setItem(READING_SIZE_KEY, String(fontScale)); }
+    catch { /* Reading works without persistent browser storage. */ }
   }, [fontScale]);
 
   const handleKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
@@ -167,12 +187,13 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
     const documentElement = frame.current?.contentDocument;
     const readerWindow = frame.current?.contentWindow;
     if (!documentElement || !readerWindow) return;
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
     if (id === "top") {
-      readerWindow.scrollTo({ top: 0, behavior: "smooth" });
+      readerWindow.scrollTo({ top: 0, behavior });
       return;
     }
     const target = chapterTarget(documentElement, id);
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    target?.scrollIntoView({ behavior, block: "start" });
   };
 
   const prepareReader = () => {
@@ -286,6 +307,9 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
           div.chapter { margin-top: 2.5rem !important; }
           h2 { margin-top: 2.5rem !important; }
         }
+        @media (prefers-reduced-motion: reduce) {
+          html { scroll-behavior: auto !important; }
+        }
       `;
       documentElement.head.append(style);
     }
@@ -302,6 +326,7 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
     const rememberChapter = () => {
       readerWindow.cancelAnimationFrame(chapterFrame);
       chapterFrame = readerWindow.requestAnimationFrame(() => {
+        readingAnchor.current = captureReadingAnchor(documentElement);
         const nextChapter = chapterAtPosition(documentElement, readerWindow);
         if (nextChapter === activeChapter) return;
         activeChapter = nextChapter;
@@ -333,7 +358,7 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
       }
       requestAnimationFrame(() => {
         const target = chapterTarget(documentElement, initialChapter);
-        target?.scrollIntoView({ block: "start" });
+        target?.scrollIntoView({ block: "start", behavior: "instant" });
         scrollPosition.current = readerWindow.scrollY;
         rememberChapter();
       });
@@ -343,9 +368,14 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
 
     try {
       const savedPosition = Number(window.localStorage.getItem(READING_POSITION_KEY));
-      if (Number.isFinite(savedPosition) && savedPosition > 0) {
+      let savedAnchor: unknown = null;
+      try { savedAnchor = JSON.parse(window.localStorage.getItem(READING_ANCHOR_KEY) ?? "null"); }
+      catch { /* Fall back to the legacy pixel bookmark. */ }
+      if (savedAnchor || (Number.isFinite(savedPosition) && savedPosition > 0)) {
         requestAnimationFrame(() => {
-          readerWindow.scrollTo({ top: savedPosition });
+          if (!restoreReadingAnchor(documentElement, readerWindow, savedAnchor)) {
+            readerWindow.scrollTo({ top: Number.isFinite(savedPosition) ? Math.max(0, savedPosition) : 0, behavior: "instant" });
+          }
           scrollPosition.current = readerWindow.scrollY;
           rememberChapter();
         });

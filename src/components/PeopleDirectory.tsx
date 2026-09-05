@@ -1,4 +1,4 @@
-import { useId, useMemo, useState } from "react";
+import { useId, useMemo, useRef, useState } from "react";
 import { X } from "lucide-react";
 import type { ResidentStatic } from "../types";
 
@@ -61,6 +61,7 @@ export function PeopleDirectory({
   autoFocusSearch = false
 }: PeopleDirectoryProps) {
   const [query, setQuery] = useState(initialQuery);
+  const searchInput = useRef<HTMLInputElement>(null);
   const componentId = useId();
   const titleId = `${componentId}-title`;
   const searchId = `${componentId}-search`;
@@ -95,6 +96,7 @@ export function PeopleDirectory({
       <label className="people-directory__search" htmlFor={searchId}>
         <span>Find a citizen</span>
         <input
+          ref={searchInput}
           id={searchId}
           type="search"
           value={query}
@@ -216,7 +218,7 @@ export function PeopleDirectory({
       ) : (
         <div id={resultsId} className="people-directory__empty">
           <p>No one matches “{query.trim()}”.</p>
-          <button type="button" onClick={() => setQuery("")}>Clear search</button>
+          <button type="button" onClick={() => { setQuery(""); searchInput.current?.focus(); }}>Clear search</button>
         </div>
       )}
 
