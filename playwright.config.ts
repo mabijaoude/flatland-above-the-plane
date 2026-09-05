@@ -8,16 +8,21 @@ export default defineConfig({
   workers: 1,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
-  timeout: 30_000,
+  maxFailures: process.env.CI ? 2 : undefined,
+  timeout: process.env.CI ? 60_000 : 30_000,
+  expect: { timeout: process.env.CI ? 10_000 : 5_000 },
   use: {
     baseURL,
     actionTimeout: 10_000,
     viewport: { width: 1440, height: 1000 },
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
-    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
-      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE }
-      : undefined
+    launchOptions: {
+      executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined,
+      // Hosted runners have no physical GPU. Explicit SwiftShader uses the
+      // supported software ANGLE path; this flag never ships in the app.
+      args: process.env.CI ? ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] : []
+    }
   },
   // An explicit URL exercises an already-running development deployment.
   // The default uses the built artifact, including its materialized LFS images.

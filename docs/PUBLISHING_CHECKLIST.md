@@ -6,6 +6,7 @@ Status at the September 2026 release review. The repository remains private and 
 
 - [ ] **Approve and complete historical Blender metadata cleanup.** The current three `.blend` sources have been sanitized and opened successfully in Blender. Older Git/LFS versions still contain a local file-browser workspace directory. A clean current checkout does not remove historical objects. Decide on a reviewed history rewrite or a fresh sanitized public history, retain a private backup, and inspect every retained commit and LFS object before publication. This destructive step has deliberately not been performed without owner approval.
 - [ ] Confirm ownership or documented permission for every original artwork/source file. Automated checks cannot establish ownership or settle worldwide copyright status.
+- [ ] Designate a confidential conduct-reporting channel and replace the explicit pending-channel notice in `CODE_OF_CONDUCT.md`. The owner's profile currently has no public contact method; do not expose a personal email without permission.
 - [ ] Approve the final public source snapshot and repository visibility change explicitly.
 
 ## Repository foundations
