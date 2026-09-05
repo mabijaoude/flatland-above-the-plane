@@ -42,7 +42,7 @@ The first entry can be visually surprising. A dismissible explanation could dist
 - Measure rendering on a mid-range phone, integrated graphics, and a throttled network before changing visual fidelity.
 - Keep automatic quality decisions stable and offer a clear recovery path for WebGL initialization/context loss.
 - Profile the renderer before reintroducing fine-grained vendor chunks; browser startup tests must remain mandatory.
-- Consider pausing background work while long-form reading, with an explicit explanation if town time is paused.
+- Hidden 3D drawing now pauses during reading/context and Native vision; further reductions in background simulation work should explicitly explain any change to town time.
 - Success: documented frame-time and loading budgets, with no loss of book/context access on rendering failure.
 
 ## 6. Portable towns and shareable experiments
@@ -71,5 +71,6 @@ An optional versioned export/import would make browser-local saves less fragile 
 - Build/CI checks fetch and validate Git LFS assets and inspect Blender source metadata.
 - Static asset caching distinguishes hashed bundles from stable artwork URLs.
 - Browser smoke coverage exercises startup, the tour, reader, search, and compact layout.
+- Hidden 3D drawing pauses during reading/context and Native vision; Native vision reuses its canvas buffer between simulation updates.
 
 Launch prerequisites and review evidence belong in [the publishing checklist](docs/PUBLISHING_CHECKLIST.md), not this feature backlog.

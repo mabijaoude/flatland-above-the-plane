@@ -14,6 +14,7 @@ Scope: review the complete application and open-source readiness, implement smal
 | Keyboard continuity | Clearing a failed search or moving between context and book could lose useful focus; welcome Tab navigation escaped its dialog. | Restore appropriate focus and contain onboarding Tab navigation. |
 | Discoverability | Geometry choices displayed only side counts; the help recipe opened the wall during the extra-direction example. | Add polygon previews and explain carrying across a still-closed boundary. |
 | Failure recovery | A failed application download could leave the loading screen with no useful next action. | Provide a reload action and direct access to the HTML book, without displaying exception details. |
+| Hidden rendering work | The 3D view kept drawing beneath reading/context and Native vision; the native canvas reallocated its buffer each update. | Suspend hidden 3D drawing and resize the native buffer only when dimensions change. Town simulation continues. |
 | Hosting | Older nginx runtime and long-lived caching of stable artwork URLs made maintenance less reliable. | Update to nginx 1.30.4, revalidate stable URLs, cache hashed bundles immutably, hide version details, and add defensive response headers. |
 | Contribution workflow | A new contributor could miss LFS, licenses, browser checks, or the local-data model. | Expand README/CONTRIBUTING, add smoke tests, and make launch gates explicit. |
 
@@ -34,6 +35,7 @@ Times below are UTC (the work began on September 4 in the reviewer's local timez
 - Release/license checks validate 67 production dependency entries, five bundled dependency license texts, and the retained source edition.
 - All 106 tests across 20 unit/component files pass, covering simulation, geometry, topology, controls, persistence, reader anchors, asset validation, and Blender metadata privacy.
 - Eight production-build browser tests cover startup/tour, full-book decoding, reading position/size, focus, search, download-failure recovery, required assets/notices, and touch-sized reduced-motion reading.
+- Headless CI uses explicit software ANGLE rendering, bounded longer timeouts, a fail-fast limit, and retained failure traces. This is functional coverage, not a physical-GPU performance benchmark.
 - `pnpm audit --audit-level=low` returned no known vulnerabilities at review time.
 - All three sanitized Blender sources opened in Blender 4.5.10 with relative workspace paths and intact material/image data.
 - The private repository already has the demo homepage, description, topics, Issues, dependency maintenance, and core community documents. No open Dependabot security alerts were returned. Optional dependency PRs were not merged as part of this pass.
