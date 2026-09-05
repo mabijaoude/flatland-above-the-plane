@@ -72,8 +72,12 @@ export function NativeVision({
     const width = Math.round(element.clientWidth);
     const height = Math.round(element.clientHeight);
     if (!width || !height) return;
-    element.width = Math.round(width * ratio);
-    element.height = Math.round(height * ratio);
+    const pixelWidth = Math.round(width * ratio);
+    const pixelHeight = Math.round(height * ratio);
+    // Resetting either dimension reallocates the backing buffer. Ordinary
+    // simulation ticks need only repaint it, not resize it.
+    if (element.width !== pixelWidth) element.width = pixelWidth;
+    if (element.height !== pixelHeight) element.height = pixelHeight;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     context.fillStyle = "#11140f";
     context.fillRect(0, 0, width, height);
