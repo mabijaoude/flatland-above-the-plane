@@ -3,6 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 async function explore(page: Page) {
   await page.goto("/");
   await page.getByRole("button", { name: "Explore freely", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "See Flatland from above." })).not.toBeVisible();
 }
 
 test("welcome contains keyboard focus and the full book opens directly", async ({ page }) => {
@@ -39,6 +40,8 @@ test("book text resizing and reopening preserve the passage and size", async ({ 
 
 test("clearing an empty citizen search returns focus to search", async ({ page }) => {
   await explore(page);
+  // Begin outside the dismissed welcome dialog, even on a slow renderer.
+  await page.getByRole("button", { name: "Read Flatland", exact: true }).focus();
   await page.keyboard.press("Control+k");
   const search = page.getByRole("searchbox", { name: "Find a citizen" });
   await search.fill("no-matching-citizen");
