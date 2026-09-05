@@ -78,10 +78,10 @@ export function ControlsDialog({ onClose }: ControlsDialogProps) {
         <div className="controls-dialog__recipe">
           <p className="eyebrow">The locked-room experiment</p>
           <ol>
-            <li><strong>Seal</strong> the room’s openings.</li>
-            <li><strong>Pick up</strong> citizens and place them inside.</li>
-            <li><strong>Open</strong> the boundary again.</li>
-            <li><strong>Find and follow</strong> one citizen through the exit.</li>
+            <li><strong>Find</strong> the Closed Room in the town view. Its boundary starts sealed.</li>
+            <li><strong>Pick up</strong> a citizen and carry them above the wall.</li>
+            <li><strong>Place</strong> them inside with Choose exact spot, then lift them back out.</li>
+            <li><strong>Leave the wall closed.</strong> The extra direction—not an opening—makes the journey possible.</li>
           </ol>
         </div>
         <div className="controls-dialog__platforms">

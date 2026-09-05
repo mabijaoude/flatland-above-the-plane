@@ -7,6 +7,7 @@ Describe the change and why it belongs in the project.
 - [ ] `pnpm check:release`
 - [ ] `pnpm test`
 - [ ] `pnpm build`
+- [ ] `pnpm test:browser` for interaction or build changes
 - [ ] Keyboard and touch behavior checked when relevant
 - [ ] Screenshots or recording attached for visible changes
 
