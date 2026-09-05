@@ -8,25 +8,15 @@ export default defineConfig({
     port: 5173
   },
   build: {
-    chunkSizeWarningLimit: 900,
+    chunkSizeWarningLimit: 1500,
     rolldownOptions: {
       output: {
         codeSplitting: {
-          includeDependenciesRecursively: false,
+          // React, its reconciler, and shared CommonJS helpers must initialize
+          // together. Splitting them by package can introduce startup cycles.
+          includeDependenciesRecursively: true,
           groups: [
-            { name: "drei", test: /@react-three[\\/]drei/ },
-            { name: "react-three-fiber", test: /@react-three[\\/]fiber/ },
-            {
-              name: "three",
-              test: (id) =>
-                /[\\/]three[\\/]/.test(id) && !id.includes("@react-three")
-            },
-            {
-              name: "react",
-              test: (id) =>
-                id.includes("react-dom") || /[\\/]react[\\/]/.test(id)
-            },
-            { name: "icons", test: /lucide-react/ }
+            { name: "vendor", test: /[\\/]node_modules[\\/]/ }
           ]
         }
       }

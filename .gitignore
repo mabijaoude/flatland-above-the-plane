@@ -16,3 +16,14 @@ coverage/
 .vscode/
 *.tmp
 *.log
+
+# Local configuration, credentials, and deployment receipts
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+.nas-deploy/
+build-info.json
+playwright-report/
+test-results/
