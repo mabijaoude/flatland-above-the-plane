@@ -92,6 +92,25 @@ test("the production artifact contains actual textures and license notices", asy
 
 test.describe("phone-sized reading", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: "reduce" });
+  test("rotating the viewport preserves the current passage", async ({ page }) => {
+    await explore(page);
+    await page.getByRole("button", { name: "Read Flatland", exact: true }).tap();
+    await expect(page.locator("iframe")).toHaveClass("is-ready");
+    await page.getByRole("button", { name: "Make reading text larger" }).tap();
+    await page.getByRole("button", { name: "Make reading text larger" }).tap();
+    await page.getByRole("combobox", { name: "Go to a chapter" }).selectOption("chap17");
+    const heading = page.frameLocator("iframe").getByRole("heading", { name: /17 How the Sphere/ });
+    const passageVisible = () => heading.evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    });
+    await expect.poll(passageVisible).toBe(true);
+    await page.setViewportSize({ width: 844, height: 390 });
+    await expect.poll(passageVisible).toBe(true);
+    await expect(page.getByRole("combobox", { name: "Go to a chapter" })).toHaveValue("chap17");
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect.poll(passageVisible).toBe(true);
+  });
   test("text controls remain visible and chapter jumps respect reduced motion", async ({ page }) => {
     await explore(page);
     await page.getByRole("button", { name: "Read Flatland", exact: true }).tap();

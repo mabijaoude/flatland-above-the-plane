@@ -77,7 +77,10 @@ function chapterTarget(documentElement: Document, id: BookChapterId) {
 }
 
 function chapterAtPosition(documentElement: Document, readerWindow: Window): BookChapterId {
-  const readingLine = readerWindow.scrollY + Math.min(160, readerWindow.innerHeight * .2);
+  // A short landscape reader may show little beyond the chapter heading and
+  // its top margin. Use its midpoint instead of labelling that view as the
+  // preceding chapter; taller readers retain the 160px reading threshold.
+  const readingLine = readerWindow.scrollY + Math.min(160, readerWindow.innerHeight * .5);
   let active: BookChapterId = "top";
   for (const item of chapters.slice(1)) {
     const target = chapterTarget(documentElement, item.id);
@@ -323,9 +326,15 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
     };
     let chapterFrame = 0;
     let activeChapter = chapter;
+    let readerWidth = readerWindow.innerWidth;
+    let readerHeight = readerWindow.innerHeight;
     const rememberChapter = () => {
       readerWindow.cancelAnimationFrame(chapterFrame);
       chapterFrame = readerWindow.requestAnimationFrame(() => {
+        // A narrower/shorter viewport may clamp the old pixel scroll offset
+        // before its resize event runs. Keep the previous text anchor until
+        // that event restores it; otherwise we would save the clamped ending.
+        if (readerWindow.innerWidth !== readerWidth || readerWindow.innerHeight !== readerHeight) return;
         readingAnchor.current = captureReadingAnchor(documentElement);
         const nextChapter = chapterAtPosition(documentElement, readerWindow);
         if (nextChapter === activeChapter) return;
@@ -342,11 +351,20 @@ export function BookReader({ onClose, onOpenContext, initialChapter }: BookReade
       scrollPosition.current = readerWindow.scrollY;
       rememberChapter();
     };
+    const preserveViewportPosition = () => {
+      readerWidth = readerWindow.innerWidth;
+      readerHeight = readerWindow.innerHeight;
+      restoreReadingAnchor(documentElement, readerWindow, readingAnchor.current);
+      scrollPosition.current = readerWindow.scrollY;
+      rememberChapter();
+    };
     documentElement.addEventListener("keydown", handleReaderKey);
     readerWindow.addEventListener("scroll", rememberPosition, { passive: true });
+    readerWindow.addEventListener("resize", preserveViewportPosition);
     readerCleanup.current = () => {
       documentElement.removeEventListener("keydown", handleReaderKey);
       readerWindow.removeEventListener("scroll", rememberPosition);
+      readerWindow.removeEventListener("resize", preserveViewportPosition);
       readerWindow.cancelAnimationFrame(chapterFrame);
     };
 
