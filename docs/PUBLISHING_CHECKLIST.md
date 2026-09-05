@@ -35,7 +35,7 @@ Status at the September 2026 release review. The repository remains private and 
 - [x] Local release checks, unit tests, production build, dependency audit, and browser smoke tests pass; see [review evidence](RELEASE_REVIEW.md).
 - [x] The book retains its Project Gutenberg header, footer, illustrations, and license; optional context never gates direct reading.
 - [x] Current public README copy contains no private-network/deployment-only address.
-- [ ] Finish the development deployment and final touch-oriented five-minute interaction; record its outcome in the review evidence.
+- [x] Complete three five-minute application interactions, including a touch-oriented visit on the updated development service; record findings and regression fixes in the review evidence.
 - [ ] Before production promotion, approve the tested development image and verify the public route on that exact release. Do not rebuild a different image as a shortcut to promotion.
 - [ ] Once the history and rights gates are complete, change repository visibility, recheck public links/settings and a fresh LFS clone, then tag the first public release.
 - [ ] Prepare the LinkedIn post with the live demo, repository, a short dimensional example, and an honest description of accessibility/browser limitations.
