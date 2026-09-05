@@ -107,8 +107,13 @@ Requirements:
 
 - Node.js 22.12 or later
 - pnpm 11 (the repository pins the package-manager version)
+- [Git LFS](https://git-lfs.com/) for the artwork and optional Blender sources
 
 ```powershell
+git lfs install
+git clone https://github.com/mabijaoude/flatland-above-the-plane.git
+cd flatland-above-the-plane
+git lfs pull
 pnpm install --frozen-lockfile
 pnpm dev
 ```
@@ -121,7 +126,24 @@ Run the complete release verification suite:
 pnpm verify
 ```
 
-That command validates required public-release files and dependency licenses, runs the tests, and creates a production build.
+That command validates release notices, dependency licenses, Blender metadata, and materialized image assets; runs the tests; and creates a production build. A missing Git LFS download fails with instructions instead of silently shipping broken textures. Use a Git clone with LFS rather than relying on a source ZIP to contain binary assets.
+
+Run the browser smoke tests against the built application:
+
+```powershell
+pnpm exec playwright install chromium
+pnpm test:browser
+```
+
+The default smoke-test runner starts and stops a loopback-only preview on port 4173. To test an existing development deployment, set `PLAYWRIGHT_BASE_URL` to its URL. CI tests the built artifact with a fresh browser profile; it does not deploy the application.
+
+## Privacy, accessibility, and limits
+
+The application has no account system, advertising, or analytics integration. Town saves use IndexedDB in the current browser; reading position, text size, and onboarding preferences use local storage. Clearing site data removes those local settings and saves. Hosting infrastructure can still keep ordinary access logs; links to external sources use those sources' own privacy policies.
+
+Desktop keyboard shortcuts, labelled controls, modal focus handling, text resizing, reduced-motion chapter navigation, and touch controls are included. The map is a WebGL-based visual simulation, not a fully screen-reader-equivalent experience. A current WebGL-capable browser is recommended; the complete HTML book also works directly without the simulation. Physical-device and assistive-technology testing remain valuable contributions.
+
+Larger follow-up ideas are tracked in [Astra improvements](Astra%20improvements.md). See the [publishing checklist](docs/PUBLISHING_CHECKLIST.md) for the remaining owner decisions before the first public release.
 
 Rebuild the optional planar material library with Blender 4.5 or later:
 

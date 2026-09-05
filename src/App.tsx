@@ -1469,6 +1469,7 @@ export default function App() {
           experience={sceneExperience}
           cameraInput={cameraInput}
           quality={experience.quality}
+          renderActive={camera !== "native" && !bookOpen && !aboutOpen}
           frameSignal={frameSignal}
           resetSignal={resetSignal}
           restorePose={restorePose}

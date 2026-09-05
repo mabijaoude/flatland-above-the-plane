@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { useRef, type KeyboardEvent } from "react";
 
 type WelcomeDialogProps = {
   hasSavedTown: boolean;
@@ -17,9 +18,26 @@ export function WelcomeDialog({
   onReadBook,
   onOpenAnalogy
 }: WelcomeDialogProps) {
+  const dialog = useRef<HTMLElement>(null);
+  const trapFocus = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "Tab") return;
+    const buttons = dialog.current?.querySelectorAll<HTMLButtonElement>("button");
+    if (!buttons?.length) return;
+    const first = buttons[0];
+    const last = buttons[buttons.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
   return (
     <div className="intro-scrim">
       <section
+        ref={dialog}
+        onKeyDown={trapFocus}
         className="intro-card parchment-panel"
         role="dialog"
         aria-modal="true"

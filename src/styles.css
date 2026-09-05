@@ -28,6 +28,11 @@ button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px s
 .boot-shell, .boot-error { min-height: 100%; display: grid; place-content: center; text-align: center; background: radial-gradient(circle at 50% 42%, #f6edcf 0, #d6c39b 48%, #89918b 100%); color: var(--ink); }
 .boot-shell span, .boot-error p { font: 700 clamp(3rem, 9vw, 8rem)/0.9 Besley, serif; letter-spacing: 0.09em; text-transform: uppercase; }
 .boot-shell p { font-size: 0.88rem; letter-spacing: 0.19em; text-transform: uppercase; color: var(--ink-soft); }
+.boot-error { padding: 24px; gap: 16px; }
+.boot-error h1 { margin: 0; font: 600 clamp(1.5rem, 5vw, 2.5rem) Besley, serif; }
+.boot-error p { max-width: 36rem; margin: 0; font: 400 1rem/1.5 "Source Sans 3", sans-serif; letter-spacing: normal; text-transform: none; }
+.boot-error button, .boot-error a { min-height: 44px; padding: 10px; color: #315d57; }
+noscript { position: fixed; z-index: 100; inset: auto 0 0; padding: 16px; background: #f5ecd2; }
 .app-shell, .world-canvas { position: absolute; inset: 0; }
 .base-layer, .embodied-layer { position: absolute; inset: 0; }
 .embodied-layer { pointer-events: none; }
@@ -274,6 +279,8 @@ button:disabled { cursor: not-allowed; opacity: .52; }
 .shape-options { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-top: 6px; }
 .shape-options button { min-height: 44px; padding: 8px 3px; border: 1px solid var(--line); background: transparent; border-radius: 3px; font: 600 1rem Besley, serif; cursor: pointer; }
 .shape-options button.is-selected { color: #fff; background: var(--verdigris); }
+.shape-option-preview { display: block; width: 24px; height: 24px; margin: 0 auto 3px; }
+.shape-option-preview polygon { fill: currentColor; fill-opacity: .15; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
 .shape-options span { display: block; font: 400 .58rem "Source Sans 3", sans-serif; }
 .form-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .form-pair input[type=color] { display: block; width: 100%; height: 44px; margin-top: 5px; border: 1px solid var(--line); background: transparent; }
@@ -1330,7 +1337,9 @@ button[aria-disabled="true"] {
 
 @media (max-width: 430px) {
   .book-reader__controls { grid-template-columns: minmax(0, 1fr) auto; }
-  .book-reader__zoom { display: none; }
+  .book-reader__zoom { position: absolute; top: max(1px, env(safe-area-inset-top)); right: 54px; border: 0; }
+  .book-reader__zoom button { width: 44px; height: 44px; }
+  .book-reader__zoom span { min-width: 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

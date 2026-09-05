@@ -46,6 +46,7 @@ type SceneProps = {
   experience: SceneExperience;
   cameraInput: CameraInput;
   quality: QualityPreference;
+  renderActive?: boolean;
   frameSignal: number;
   resetSignal: number;
   restorePose?: CameraPoseSave;
@@ -1105,6 +1106,9 @@ export function FlatworldScene(props: SceneProps) {
   return (
     <Canvas
       id="flatworld-canvas"
+      // Keep simulation state live, but do not draw a hidden 3D view behind
+      // Native vision or long-form reading. Returning resumes the frame loop.
+      frameloop={props.renderActive === false ? "never" : "always"}
       tabIndex={0}
       aria-label="Interactive map of Flatland"
       onContextMenu={(event) => event.preventDefault()}

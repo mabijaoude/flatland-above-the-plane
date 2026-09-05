@@ -9,10 +9,11 @@ RUN pnpm install --frozen-lockfile
 COPY index.html tsconfig.json vite.config.ts ./
 COPY src ./src
 COPY public ./public
+COPY scripts/check-assets.mjs ./scripts/check-assets.mjs
 
 RUN pnpm build
 
-FROM nginx:1.27-alpine
+FROM nginx:1.30.4-alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html

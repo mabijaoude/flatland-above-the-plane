@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#e5dcc5" />
     <meta name="description" content="Explore a living 2D town and test the Flatland thought experiment: how an extra spatial direction changes a sealed boundary." />
     <meta name="application-name" content="Flatland: Above the Plane" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Flatland: Above the Plane" />
     <meta property="og:description" content="An independent 2D to 3D to 4D dimensional thought experiment inspired by Edwin A. Abbott's Flatland." />
@@ -13,13 +14,7 @@
     <meta name="twitter:title" content="Flatland: Above the Plane" />
     <meta name="twitter:description" content="An independent 2D to 3D to 4D dimensional thought experiment inspired by Edwin A. Abbott's Flatland." />
     <title>Flatland: Above the Plane</title>
-    <script>
-      window.addEventListener("error", function (event) {
-        var root = document.getElementById("root");
-        if (!root || root.childNodes.length) return;
-        root.innerHTML = '<main class="boot-error"><p>Flatland could not be prepared.</p><small>' + String(event.message || event.error || "Unknown error") + "</small></main>";
-      });
-    </script>
+    <script src="/boot.js"></script>
   </head>
   <body>
     <div id="root">
@@ -28,6 +23,7 @@
         <p>Preparing the district…</p>
       </main>
     </div>
+    <noscript><p>Flatland's interactive town needs JavaScript. <a href="/books/flatland/index.html">Read the complete illustrated book without JavaScript.</a></p></noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
