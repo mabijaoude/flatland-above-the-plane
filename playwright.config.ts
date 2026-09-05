@@ -14,14 +14,16 @@ export default defineConfig({
   use: {
     baseURL,
     actionTimeout: 10_000,
-    viewport: { width: 1440, height: 1000 },
+    viewport: process.env.CI ? { width: 1024, height: 768 } : { width: 1440, height: 1000 },
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     launchOptions: {
       executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined,
       // Hosted runners have no physical GPU. Explicit SwiftShader uses the
       // supported software ANGLE path; this flag never ships in the app.
-      args: process.env.CI ? ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] : []
+      // Let Skia draw the 2D native-vision canvas directly on the CPU instead
+      // of routing hundreds of paint operations through an emulated GPU.
+      args: process.env.CI ? ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-accelerated-2d-canvas"] : []
     }
   },
   // An explicit URL exercises an already-running development deployment.
