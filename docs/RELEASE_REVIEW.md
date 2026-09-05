@@ -8,7 +8,7 @@ Scope: review the complete application and open-source readiness, implement smal
 | --- | --- | --- |
 | Production startup | Package-specific vendor splitting could create a React/reconciler initialization cycle despite a successful build and unit suite. | Keep the dependency graph in one vendor chunk; exercise the actual built app in CI. |
 | Binary assets | An ordinary checkout could leave Git LFS pointers where images were expected. | CI fetches LFS; the build rejects unresolved pointers and invalid PNG signatures; browser checks decode every book illustration. |
-| Source privacy | Three Blender workspaces retained an embedded local file-browser path. | Sanitize current sources, verify they still open in Blender, and add regression guards. **Historical copies still need the separately approved cleanup in the publishing checklist.** |
+| Source privacy | Three Blender workspaces retained an embedded local file-browser path. | Sanitize sources, verify they still open in Blender, and add regression guards. The subsequently approved history rewrite cleans all active branches; **GitHub-held PR references and orphaned LFS objects still need a server-side purge.** See [cleanup status](HISTORY_CLEANUP.md). |
 | Reading | Font changes could move the current passage thousands of pixels away; size reset on reopening. | Preserve a text-block anchor and remember text size locally. |
 | Compact reading | Text-size controls disappeared below 430 CSS pixels; chapter navigation ignored reduced motion. | Keep controls visible on phone widths and respect reduced motion inside the book frame. |
 | Screen rotation | The final touch visit found that changing orientation could clamp a deep reading position to the end of the book. | Restore the retained text anchor when the reader viewport changes; cover portrait-to-landscape and back in a regression test. |
@@ -45,7 +45,7 @@ Times below are UTC (the work began on September 4 in the reviewer's local timez
 
 The reviewed release was built and deployed through the canonical NAS development workflow. nginx configuration validation passed; development is registered as managed and healthy. Production retains its original container and image, and its public HTTPS page returns successfully.
 
-The browser sessions exercise the real development service; CI separately exercises a clean production build. The added rotation regression checks 125% text in portrait, landscape, and back. Final handoff requires a repeat of the browser suite against the updated development service.
+The browser sessions exercise the real development service; CI separately exercises a clean production build. The added rotation regression checks 125% text in portrait, landscape, and back. All nine browser tests passed again against the final updated development service before handoff.
 
 HTTP checks verified revalidation for stable artwork/book URLs, immutable caching for hashed bundles, no-cache/no-store HTML, `nosniff`, the health endpoint, and genuine 404 responses for hidden paths and missing assets. These checks complement, rather than replace, browser verification.
 
@@ -53,7 +53,7 @@ An existing platform limitation remains: dashboard-driven GitHub deployment has 
 
 ## Remaining boundaries
 
-Do not make the repository public until its historical binary metadata and owner rights checks are resolved. Production promotion is a separate explicit decision. No DNS, certificates, production container, repository visibility, analytics, or account integration is changed by this review.
+Do not make the repository public until GitHub's server-side historical metadata purge and owner rights checks are resolved. Production promotion is a separate explicit decision. No DNS, certificates, production container, repository visibility, analytics, or account integration is changed by this review or the approved history cleanup.
 
 Physical-device browser testing, screen-reader parity, WebGL context-loss recovery, deeper rendering/performance profiling, and a complete container vulnerability scan are not claimed here. The prioritized product backlog is [Astra improvements](../Astra%20improvements.md); actionable owner gates are in [the publishing checklist](PUBLISHING_CHECKLIST.md).
 
