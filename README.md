@@ -185,7 +185,7 @@ The application has no account system, advertising, or analytics integration. To
 
 Desktop keyboard shortcuts, labelled controls, modal focus handling, text resizing, reduced-motion chapter navigation, and touch controls are included. The map is a WebGL-based visual simulation, not a fully screen-reader-equivalent experience. A current WebGL-capable browser is recommended; the complete HTML book also works directly without the simulation. Physical-device and assistive-technology testing remain valuable contributions.
 
-Larger follow-up ideas are tracked in [Astra improvements](Astra%20improvements.md). See the [publishing checklist](docs/PUBLISHING_CHECKLIST.md) for the remaining owner decisions before the first public release.
+The first public snapshot is [v0.2.0](https://github.com/mabijaoude/flatland-above-the-plane/releases/tag/v0.2.0). Larger follow-up ideas are tracked in [Astra improvements](Astra%20improvements.md); the [publishing checklist](docs/PUBLISHING_CHECKLIST.md) records launch verification and optional follow-up work.
 
 Rebuild the optional planar material library with Blender 4.5 or later:
 

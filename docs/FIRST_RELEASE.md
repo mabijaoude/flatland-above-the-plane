@@ -1,6 +1,6 @@
 # First public release
 
-Prepared copy, not a published release or announcement. The current package version is `0.2.0`; choose the corresponding first public tag only after approving repository visibility and verifying the release.
+Published on September 6, 2026: [v0.2.0](https://github.com/mabijaoude/flatland-above-the-plane/releases/tag/v0.2.0), from verified production commit `db925aef38a44a1b1bd2eb37a211aea7e324bcb4`. The repository is public. The LinkedIn copy below remains a draft, not a posted announcement.
 
 ## Release description
 
@@ -38,12 +38,12 @@ Source: https://github.com/mabijaoude/flatland-above-the-plane
 
 Start with the 90-second tour. I'd especially like to hear whether the change from the overhead map to Native vision changes how you think about the town.
 
-## Owner launch actions
+## Launch record and announcement follow-up
 
-1. Approve making the existing GitHub repository public. This has not been done by the documentation or production-deployment approval.
-2. At launch, enable private vulnerability reporting and require the **Verify** CI check on `main` where available; verify unauthenticated access to the README, images, source, and a fresh LFS clone.
-3. Create the first GitHub release/tag from the verified source snapshot, using the release description above.
+1. Completed: the owner explicitly authorized public launch; the existing repository is public.
+2. Completed: private vulnerability reporting, secret scanning/push protection, and Dependabot security updates are enabled. Changes to `main` require a pull request, an up-to-date passing **Verify** check from GitHub Actions, and resolved review conversations. Force pushes and deletion are blocked, including for administrators. No second-person approval is required for this solo-maintainer project.
+3. Completed: anonymous README/image access and a fresh clone with all LFS assets were verified. The first release, `v0.2.0`, tags the exact verified development/production snapshot. Subsequent launch-record edits are documentation-only.
 4. Optionally upload `public/social-preview.jpg` in the repository's **Settings → General → Social preview**. The website already declares this image for its own shared links.
 5. Preview the live URL and repository link in the announcement before posting. Use a project screenshot, not private setup/email screenshots.
 
-These actions can be assisted after authorization; account-only prompts or unavailable GitHub plan features may need the owner's involvement. See the [publishing checklist](PUBLISHING_CHECKLIST.md) for the complete record.
+The optional repository social preview and the owner's announcement are not release blockers. See the [publishing checklist](PUBLISHING_CHECKLIST.md) for the complete record.
