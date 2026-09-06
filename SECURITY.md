@@ -6,7 +6,7 @@ Security fixes are made on the current `main` branch. Tagged pre-1.0 releases ar
 
 ## Reporting a vulnerability
 
-Use [GitHub's private vulnerability reporting page](https://github.com/mabijaoude/flatland-above-the-plane/security/advisories/new). The owner must enable this feature when the repository becomes public. Until that channel is enabled, do not send vulnerability details through a public issue or discussion.
+Use [GitHub's private vulnerability reporting page](https://github.com/mabijaoude/flatland-above-the-plane/security/advisories/new). The owner must enable this feature when the repository becomes public. If that page is unavailable, email [flatland-sim.storable683@aleeas.com](mailto:flatland-sim.storable683@aleeas.com), which forwards privately to the maintainer. Do not send vulnerability details through a public issue or discussion.
 
 Please include:
 

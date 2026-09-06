@@ -1,8 +1,59 @@
 # Flatland: Above the Plane
 
-An interactive browser world about dimensions, perception, boundaries, and the social satire inside Edwin A. Abbott's 1884 novella *Flatland: A Romance of Many Dimensions*.
+**A living two-dimensional town. An impossible third direction. An 1884 thought experiment you can play.**
 
-**Live demo:** [flatland.codefactory.synology.me](https://flatland.codefactory.synology.me/)
+## [Explore Flatland in your browser →](https://flatland.codefactory.synology.me/)
+
+**Live website: [flatland.codefactory.synology.me](https://flatland.codefactory.synology.me/)** · No sign-up · Browser-local saves · Complete illustrated book included
+
+[The experience](#the-experience) · [Mathematical roots](#the-mathematical-roots) · [History and society](#the-book-and-its-society) · [Run locally](#run-locally) · [Contribute](#contributing-and-security)
+
+[![An angled overview of Flatland's engraved, parchment-coloured town, with labelled streets, geometric citizens, and the town controls.](docs/images/town-overview.jpg)](https://flatland.codefactory.synology.me/)
+
+*Town view in the running application. [Open the live town](https://flatland.codefactory.synology.me/) or explore the screenshots below.*
+
+Flatland: Above the Plane is an independent, interactive adaptation of Edwin A. Abbott's *Flatland: A Romance of Many Dimensions*. Follow the citizens of a geometric town, see the world from inside their plane, and discover why a sealed room is only sealed to someone without another direction to move in.
+
+It is a small exploratory sandbox, not a competitive game or a full reconstruction of Victorian society. You do not need to know the book—or any advanced mathematics—to begin.
+
+## The experience
+
+### Start with a three-minute visit
+
+1. **[Open the live demo](https://flatland.codefactory.synology.me/)** and choose **Take the 90-second tour**. It introduces the town, a resident's routine, Native vision, wall editing, and undo.
+2. **Try the extra direction.** Select a citizen, choose **Pick up**, then **Choose exact spot** to return them to a clear point on the other side of a boundary. The **Controls & shortcuts** help explains the Closed Room experiment: leave its wall intact and bypass it through height.
+3. **Connect the experiment to the book.** Open **Source and context** from the information button, then jump directly to sections 17 and 19—or use **Read Flatland** to start at the beginning.
+
+Every visit can be different: watch the town run, intervene in its routes, create a citizen, or simply read.
+
+### Two viewpoints, one world
+
+| Lift beyond the plane | See from within it |
+| --- | --- |
+| [![A selected citizen lifted above the planar town, with carrying controls and the option to choose a precise return point.](docs/images/dimensional-lift.jpg)](docs/images/dimensional-lift.jpg) | [![Native vision replaces the overhead map with the restricted view of a citizen in the plane; the guided visit explains the change in perception.](docs/images/native-vision.jpg)](docs/images/native-vision.jpg) |
+| **Dimensional intervention.** Pick up a citizen, move outside the plane, and return without cutting through a wall. | **Native vision.** Trade the map's privileged overview for a deliberately restricted, wall-occluded view. |
+
+| Read the original | Explore the ideas |
+| --- | --- |
+| [![The built-in book reader showing section 17, chapter navigation, text-size controls, and the retained Project Gutenberg notice.](docs/images/illustrated-book.jpg)](docs/images/illustrated-book.jpg) | [![The Source and context page explains the locked-room analogy, the distinction between the playable 3D intervention and the hypothetical 4D extension, and links to the source text.](docs/images/source-and-context.jpg)](docs/images/source-and-context.jpg) |
+| **The complete illustrated book.** Read every chapter, resize the text, and return to your saved passage. | **Mathematics and social context.** See what comes from Abbott, what the adaptation adds, and what it deliberately leaves behind. |
+
+*Select a screenshot to inspect it at full size. Capture instructions and source notes are in [docs/images](docs/images/README.md).*
+
+### What you can do
+
+- **Survey a living town:** homes, workplaces, civic buildings, public spaces, and autonomous residents with schedules, needs, and destinations.
+- **Find, follow, or control a citizen:** search by name, role, present intent, or destination; observe their routine or move them yourself.
+- **Change boundaries:** remove a wall or seal an opening and watch affected routes replan. Undo restores your plane edits.
+- **Lift and return a resident:** use an extra direction unavailable to the town's inhabitants. Ordinary movement and collision remain two-dimensional.
+- **Create your own citizen:** choose a name and geometry, then join the same home, work, and persistence systems as the original population.
+- **Read and investigate:** the full illustrated novella, chapter navigation, remembered reading size and position, and a dedicated source-and-context page.
+
+The town's **Gazette** reports recent events. The town menu includes save/restore, projection, pause, speed, and visual-detail controls. Versioned browser-local saves retain topology, routines, created citizens, and camera state; no account or server-side save is required.
+
+Desktop shortcuts appear in context: `E` picks up the selected citizen, `F` follows, `T` opens wall editing, `Ctrl`/`⌘` + `Z` undoes a plane change, and `Space` places and releases a carried citizen. Phones and tablets use touch-oriented controls. See [accessibility and limits](#privacy-accessibility-and-limits) before assuming every desktop interaction has equivalent assistive-technology coverage.
+
+## Why Flatland?
 
 The simulation keeps its world authoritative in two dimensions: citizens, streets, buildings, walls, doors, routes, and interventions all exist on one plane. The visitor can survey that plane from three-dimensional space and test what one additional direction makes possible.
 
@@ -24,7 +75,7 @@ A resident of a plane may move along `x` and `y`, but not along `z`. A three-dim
 
 ### The locked-room argument
 
-Treat Flatland as the plane `z = 0`. A closed curve in that plane separates an inside from an outside. A resident who must remain at `z = 0` cannot move between those regions without crossing the curve. A three-dimensional visitor can instead:
+Treat Flatland as the plane `z = 0`. A simple closed curve in that plane separates an inside from an outside. A resident who must remain at `z = 0` cannot move between those regions without crossing the curve. A three-dimensional visitor can instead:
 
 1. lift the resident away from the plane by changing `z`;
 2. move across the boundary while outside the plane; and
@@ -76,20 +127,6 @@ The simulation takes the dimensional thought experiment from the book, not its s
 
 Inside the application, **Source and context** opens a dedicated explanation of the locked-room analogy, its 2D-to-3D demonstration, the further 4D argument, the relevant passages in sections 17 and 19, the book's social structure, and the choices made by this adaptation. It also links directly into the corresponding book chapters. The context is available without becoming a gate: readers can always open the complete historical text directly.
 
-## The experience
-
-- **Town view** follows autonomous citizens, surveys the town from above, and frames the plane as an engraved 1884 map.
-- **Find citizen** searches live intent and destination data, then locates, follows, or picks up a resident directly.
-- **Native vision** approximates what a resident confined to the plane could see, with planar walls providing occlusion.
-- **Edit walls** makes boundaries state-aware: remove an existing wall or add one across an opening, then watch every affected route replan.
-- **Dimensional manipulation** lifts a selected citizen out of the plane and returns them elsewhere without crossing an intervening wall.
-- **Character creation** adds new citizens to the same schedules, needs, movement rules, and local save system as the original population.
-- **Read the book** opens the complete illustrated Project Gutenberg edition with its header, footer, source notice, and license retained.
-
-The town contains homes, workplaces, civic buildings, public spaces, and deterministic resident schedules. Versioned browser-local saves retain topology, routines, player-created citizens, and camera state. No account, tracking identity, or server-side save is required.
-
-Desktop shortcuts are surfaced contextually in the application: `E` picks up the selected citizen, `F` follows, `T` opens wall editing, `Ctrl`/`⌘` + `Z` undoes a plane change, and `Space` places and releases a carried citizen. On phones and tablets, the same actions are presented through touch-oriented controls.
-
 ## Simulation and technology
 
 - React 19, TypeScript, Vite, Three.js, React Three Fiber, and Drei
@@ -100,6 +137,7 @@ Desktop shortcuts are surfaced contextually in the application: `E` picks up the
 - Versioned browser-local persistence
 - Blender-authored planar materials baked to compact color and normal textures
 - Vitest unit and component coverage for simulation, geometry, topology, controls, persistence, and guided interactions
+- Playwright browser coverage of the built application, including first visit, reading, touch-size layouts, and failure recovery
 
 ## Run locally
 
@@ -118,7 +156,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Vite serves the application on `http://127.0.0.1:5173` by default.
+Vite serves the application on `http://127.0.0.1:5173` by default. No credentials, database, or `.env` file are needed. Blender is optional: the runtime artwork is already included through Git LFS.
 
 Run the complete release verification suite:
 
@@ -135,7 +173,11 @@ pnpm exec playwright install chromium
 pnpm test:browser
 ```
 
-The default smoke-test runner starts and stops a loopback-only preview on port 4173. To test an existing development deployment, set `PLAYWRIGHT_BASE_URL` to its URL. CI tests the built artifact with a fresh browser profile; it does not deploy the application.
+The default smoke-test runner starts and stops a loopback-only preview on port 4173. To test an existing development deployment, set `PLAYWRIGHT_BASE_URL` to its URL. CI tests the built artifact with a fresh browser profile; it does not deploy the application. See the latest [CI runs](https://github.com/mabijaoude/flatland-above-the-plane/actions/workflows/ci.yml).
+
+### Host your own copy
+
+`pnpm build` produces the static application in `dist/`; no application backend is needed. Serve that directory over HTTP(S) with a static host. A [Dockerfile](Dockerfile), [Compose example](docker-compose.yml), and [nginx configuration](nginx.conf) are included for self-hosting. Materialize Git LFS assets before building. Preserve the book, fonts, and license notices, and update the absolute sharing-preview URLs in `index.html` if you use your own hostname. The project's hosting accounts and deployment infrastructure are not required to run a fork.
 
 ## Privacy, accessibility, and limits
 
@@ -164,7 +206,13 @@ blender --background --python scripts/blender/build_flatworld.py
 
 ## Contributing and security
 
-Contributions that strengthen the dimensional simulation, accessibility, historical accuracy, or documentation are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), and use [SECURITY.md](SECURITY.md) for private vulnerability reports. Changes that characterize the book or its history should cite the primary text or reliable scholarship and clearly distinguish Abbott's work from project-created examples.
+Contributions that strengthen the dimensional simulation, accessibility, historical accuracy, or documentation are welcome. You do not need to add a large feature: a clear bug report, a keyboard or phone usability check, an improved explanation, or a source correction is useful.
+
+- **Bugs and ideas:** search [GitHub Issues](https://github.com/mabijaoude/flatland-above-the-plane/issues) first; include your browser, device, reproduction steps, and expected result. Discuss larger changes before building them.
+- **Code and documentation:** start with [CONTRIBUTING.md](CONTRIBUTING.md). Changes about Abbott or Victorian history should cite the primary text or reliable scholarship and distinguish the book from project-created examples.
+- **Sensitive reports:** use [SECURITY.md](SECURITY.md) for vulnerabilities and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for confidential conduct concerns. Do not put private reports in public issues.
+
+Forks and adaptations are welcome under the applicable licenses. The `private: true` flag in `package.json` prevents accidental publication to npm; it does not restrict the MIT-licensed source or mean the application needs a private service to run.
 
 ## Rights and licenses
 

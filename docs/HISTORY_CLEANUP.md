@@ -11,13 +11,13 @@ Status: September 5, 2026 UTC. The repository remains private. This is a metadat
 - Verified an independent ordinary GitHub clone: all 13 retained release commits and 21 referenced LFS objects passed the metadata and integrity checks. The only path-pattern matches were deliberate, fictitious examples in the privacy regression tests. Commit identities use GitHub no-reply addresses.
 - Aligned the working checkout with sanitized history and removed its old reachable references/reflogs. Application code, dev and production deployments, and repository visibility were not changed by the rewrite.
 
-## Still required before making the repository public
+## Residual risk accepted by the owner
 
 GitHub retains read-only references for 14 old pull requests, plus cached objects and three orphaned LFS objects. An ordinary clone does not include those PR refs. Rewriting branches cannot itself erase those server-held copies.
 
-A private Support request has been prepared with the first changed commit, affected PR references, and the orphaned-LFS object list. The owner must submit it through GitHub Support and obtain a confirmed purge, or approve a different publication strategy if Support cannot assist. Do not publish the private report, old object identifiers, or backup files as an issue or PR.
+On September 5, 2026, the owner reviewed the limited historical folder-path disclosure and explicitly chose to proceed without a server-side purge. The metadata finding was a local workspace directory, not a credential or the contents of personal documents. A purge is therefore no longer a publication gate. This decision accepts the residual disclosure; it does not mean GitHub has erased the old objects or grant permission to change repository visibility.
 
-GitHub determines eligibility for sensitive-data removal. Follow its [official removal procedure](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository), then recheck all advertised refs, the LFS inventory, and a fresh clone before marking the publishing gate complete.
+A private Support request was prepared but has not been submitted. Keep it, the old object identifiers, and backup files private. If the owner later wants removal, GitHub determines eligibility under its [official removal procedure](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository). A successful purge would need separate verification of affected refs and LFS objects; a clean ordinary clone alone does not prove it.
 
 ## Existing clones and deployments
 

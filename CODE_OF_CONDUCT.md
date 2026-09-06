@@ -14,6 +14,6 @@ This project welcomes serious, curious collaboration. Discussions may cover math
 
 Maintainers may edit or remove contributions, lock discussions, issue a warning, or temporarily or permanently restrict participation when conduct repeatedly prevents useful collaboration or threatens another person.
 
-Before public launch, the maintainer must designate and publish a confidential conduct-reporting contact here. No private conduct channel is currently configured; do not assume the owner's GitHub profile offers one, and do not publish another person's private information in an issue. Once a reporting channel is established, reports will be reviewed on their evidence and context, and information will be shared only as needed to investigate and act.
+Report conduct concerns privately to [flatland-sim.storable683@aleeas.com](mailto:flatland-sim.storable683@aleeas.com). This project contact forwards to the maintainer; reports are not public GitHub issues. Include the relevant context and links, and do not publish another person's private information in an issue. Reports will be reviewed on their evidence and context, and information will be shared only as needed to investigate and act.
 
 This code applies in repository spaces and when someone is officially representing the project elsewhere.

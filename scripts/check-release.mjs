@@ -31,6 +31,26 @@ const bundledProjectLicense = readFileSync(new URL("public/PROJECT_LICENSE.txt",
 if (projectLicense !== bundledProjectLicense) throw new Error("The project license copied into the built artifact is stale.");
 
 const readme = readFileSync(new URL("README.md", root), "utf8");
+// README images use ordinary Git JPEGs so GitHub can render them without LFS.
+const readmeLinks = [...readme.matchAll(/\[[^\]\n]*\]\(([^)\s]+)\)/g)].map(match => match[1]);
+for (const href of readmeLinks) {
+  if (/^(?:https?:|mailto:|#)/i.test(href)) continue;
+  const path = decodeURIComponent(href.split("#")[0]);
+  if (!existsSync(new URL(path, root))) throw new Error(`README link points to a missing file: ${path}`);
+}
+const screenshotPaths = [...new Set(readmeLinks.filter(href => /^docs\/images\/.*\.jpg$/.test(href)))];
+if (screenshotPaths.length < 5) throw new Error("The README must include the five reviewed application screenshots.");
+for (const path of [...screenshotPaths, "public/social-preview.jpg"]) {
+  const bytes = readFileSync(new URL(path, root));
+  if (bytes[0] !== 0xff || bytes[1] !== 0xd8 || bytes[2] !== 0xff) {
+    throw new Error(`Invalid JPEG or unmaterialized asset pointer: ${path}`);
+  }
+  if (bytes.length > 600_000) throw new Error(`Compress the release screenshot before publishing: ${path}`);
+}
+const indexHtml = readFileSync(new URL("index.html", root), "utf8");
+for (const marker of ['property="og:image"', 'name="twitter:card" content="summary_large_image"', '/social-preview.jpg']) {
+  if (!indexHtml.includes(marker)) throw new Error(`The website sharing preview is missing: ${marker}`);
+}
 const privateReference = /(?:\b10\.\d{1,3}\.\d{1,3}\.\d{1,3}\b|\b192\.168\.\d{1,3}\.\d{1,3}\b|\b172\.(?:1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}\b|ForeverStorage\.local|\/volume1\/docker)/i;
 if (privateReference.test(readme)) throw new Error("README.md contains a private-network or deployment-only reference.");
 

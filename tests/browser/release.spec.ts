@@ -90,6 +90,22 @@ test("the production artifact contains actual textures and license notices", asy
   }
 });
 
+test("the sharing preview is a real image with the declared dimensions", async ({ page, request }) => {
+  await page.goto("/");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://flatland.codefactory.synology.me/social-preview.jpg");
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+  const preview = await request.get("/social-preview.jpg");
+  expect(preview.ok()).toBe(true);
+  expect(preview.headers()["content-type"]).toContain("image/jpeg");
+  const dimensions = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = "/social-preview.jpg";
+    await image.decode();
+    return [image.naturalWidth, image.naturalHeight];
+  });
+  expect(dimensions).toEqual([1200, 630]);
+});
+
 test.describe("phone-sized reading", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: "reduce" });
   test("rotating the viewport preserves the current passage", async ({ page }) => {

@@ -1,6 +1,17 @@
 # September 2026 release review
 
-Scope: review the complete application and open-source readiness, implement small improvements, and deploy only to development. Production and repository visibility are unchanged. This is a practical release review, not a penetration-test or accessibility certification.
+Original scope: review the complete application and open-source readiness, implement small improvements, and deploy only to development. Production and repository visibility were unchanged by that pass. The separately authorized launch-preparation follow-up is recorded below. This is a practical release review, not a penetration-test or accessibility certification.
+
+## Launch-preparation follow-up
+
+On September 5, 2026 local time (September 6 UTC), the owner approved committing/pushing the final documentation and deploying the verified release to development and production. GitHub visibility remains a separate decision.
+
+- Reorganized the README around the live demo, a short first visit, and five real application screenshots, while retaining the mathematics, Victorian social context, adaptation boundary, complete-book explanation, contributor guidance, and rights notices.
+- Captured screenshots using fresh disposable browser contexts and normal application controls; no personal saved town or browser chrome was used. Inspected every image and rendered the README with GitHub's Markdown API in desktop and phone-width previews. All five images decoded and the document had no phone-width overflow.
+- Added a compact 1200 × 630 website-sharing screenshot, descriptive Open Graph/Twitter metadata, local README-link/image guards, and a browser check that decodes the sharing image and verifies its dimensions.
+- Documented the tested forwarding alias in the conduct/security policies, the owner's accepted historical metadata risk, and a draft first-release description and LinkedIn announcement.
+- Re-ran `pnpm verify`: all 106 tests passed and the production build succeeded. The dependency audit returned no known vulnerabilities. The final browser suite now contains ten checks; CI and deployment verification must pass on the exact release before promotion is reported complete.
+- No simulation, rendering, control, persistence, or dependency code was changed in this follow-up. The application change is limited to sharing metadata and its preview image. Immutable deployment and publication receipts are maintained by Code Factory, not committed with machine-specific information here.
 
 ## Findings and changes
 
@@ -8,7 +19,7 @@ Scope: review the complete application and open-source readiness, implement smal
 | --- | --- | --- |
 | Production startup | Package-specific vendor splitting could create a React/reconciler initialization cycle despite a successful build and unit suite. | Keep the dependency graph in one vendor chunk; exercise the actual built app in CI. |
 | Binary assets | An ordinary checkout could leave Git LFS pointers where images were expected. | CI fetches LFS; the build rejects unresolved pointers and invalid PNG signatures; browser checks decode every book illustration. |
-| Source privacy | Three Blender workspaces retained an embedded local file-browser path. | Sanitize sources, verify they still open in Blender, and add regression guards. The subsequently approved history rewrite cleans all active branches; **GitHub-held PR references and orphaned LFS objects still need a server-side purge.** See [cleanup status](HISTORY_CLEANUP.md). |
+| Source privacy | Three Blender workspaces retained an embedded local file-browser path. | Sanitize sources, verify they still open in Blender, and add regression guards. The subsequently approved history rewrite cleans all active branches. GitHub-held PR references and orphaned LFS objects remain; on September 5, the owner accepted the limited historical metadata risk and chose not to require a purge. See [cleanup status](HISTORY_CLEANUP.md). |
 | Reading | Font changes could move the current passage thousands of pixels away; size reset on reopening. | Preserve a text-block anchor and remember text size locally. |
 | Compact reading | Text-size controls disappeared below 430 CSS pixels; chapter navigation ignored reduced motion. | Keep controls visible on phone widths and respect reduced motion inside the book frame. |
 | Screen rotation | The final touch visit found that changing orientation could clamp a deep reading position to the end of the book. | Restore the retained text anchor when the reader viewport changes; cover portrait-to-landscape and back in a regression test. |
@@ -53,7 +64,7 @@ An existing platform limitation remains: dashboard-driven GitHub deployment has 
 
 ## Remaining boundaries
 
-Do not make the repository public until GitHub's server-side historical metadata purge and owner rights checks are resolved. Production promotion is a separate explicit decision. No DNS, certificates, production container, repository visibility, analytics, or account integration is changed by this review or the approved history cleanup.
+The owner has confirmed ownership of the original work and accepted the residual historical folder-metadata risk without requiring a GitHub purge. A project reporting alias is configured. September 5, 2026 screenshots confirm incoming forwarding and a reply received in the other test account with the project alias and display name in the expanded sender details. The contact test is complete; this is not a full raw-header or message-content audit, and personal signatures remain the maintainer's responsibility. Explicit approval of the public source snapshot and GitHub visibility change remains required. Production deployment is now authorized through the follow-up above; the original application review and history cleanup did not themselves change production, DNS, certificates, repository visibility, analytics, or account integration.
 
 Physical-device browser testing, screen-reader parity, WebGL context-loss recovery, deeper rendering/performance profiling, and a complete container vulnerability scan are not claimed here. The prioritized product backlog is [Astra improvements](../Astra%20improvements.md); actionable owner gates are in [the publishing checklist](PUBLISHING_CHECKLIST.md).
 

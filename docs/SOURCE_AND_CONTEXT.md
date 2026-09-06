@@ -21,7 +21,7 @@ The primary source used by the project is [Project Gutenberg ebook 97](https://w
 
 ## Why the geometry works
 
-Treat a Flatlander as confined to the plane `z = 0`. A closed curve in that plane separates an inside from an outside. A resident who must remain at `z = 0` cannot change sides without crossing the curve. A three-dimensional visitor can instead:
+Treat a Flatlander as confined to the plane `z = 0`. A simple closed curve in that plane separates an inside from an outside. A resident who must remain at `z = 0` cannot change sides without crossing the curve. A three-dimensional visitor can instead:
 
 1. increase `z`, leaving the plane;
 2. move across the curve while `z ≠ 0`; and
