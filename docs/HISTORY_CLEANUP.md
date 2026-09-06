@@ -1,6 +1,6 @@
 # Pre-public history cleanup
 
-Status: September 5, 2026 UTC. The repository remains private. This is a metadata cleanup, not a new application release or permission to publish.
+Cleanup status recorded September 5, 2026 UTC, while the repository was private. The owner subsequently authorized public launch on September 6, 2026; see the [publishing checklist](PUBLISHING_CHECKLIST.md). The cleanup and accepted residual risk below are unchanged.
 
 ## Completed
 
@@ -25,4 +25,4 @@ Do not run an ordinary merge/pull from an old checkout and push the result: that
 
 Running NAS images were deliberately left alone. Their recorded commit identifiers predate the rewrite even though the reviewed application content is unchanged. A future approved deployment/promotion must explicitly account for that provenance; do not relabel or replace existing runtime images just to make their commit labels match.
 
-Return to the [publishing checklist](PUBLISHING_CHECKLIST.md) for the remaining ownership, reporting-channel, repository-settings, and release-approval gates.
+Return to the [publishing checklist](PUBLISHING_CHECKLIST.md) for the completed launch gates and optional follow-up work.
